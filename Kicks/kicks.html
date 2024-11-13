@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kicks - Premium Footwear</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        nav {
+            background-color: #1a1a1a;
+            padding: 1.2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #000000, #333333);
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 4px 20px rgba(255,255,255,0.3);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: #e44d26;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background: #c73e1d;
+        }
+
+        .brand-filter {
+            background-color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .brand-filter button {
+            margin: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .brand-filter button:hover {
+            background-color: #e44d26;
+            color: white;
+            border-color: #e44d26;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0;
+            color: #333;
+            font-size: 2rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #e44d26;
+            margin: 10px auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .brand-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .product-price {
+            color: #e44d26;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .buy-button {
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            width: 80%;
+        }
+
+        .buy-button:hover {
+            background-color: #e44d26;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(228, 77, 38, 0.3);
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #e44d26;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .brand-filter {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 1rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                padding: 1rem;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <nav>
+        <div class="logo">Kicks</div>
+    </nav>
+
+    <section class="hero-section">
+        <h1 class="hero-title">Find your perfect fit</h1>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for shoes, brands, or styles...">
+            <button class="search-button">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </div>
+    </section>
+
+    <div class="brand-filter">
+        <button>All Brands</button>
+        <button>Nike</button>
+        <button>Adidas</button>
+        <button>Puma</button>
+        <button>ASICS</button>
+        <button>New Balance</button>
+    </div>
+
+    <h2 class="section-title">Featured Products</h2>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img
+          src="/images/images/Nikeairmax.jpg"
+          alt="Nike Air Max"
+          class="product-image"
+        />
+        <p class="brand-label">Nike</p>
+        <h2 class="product-title">Air Max 90</h2>
+        <p class="product-price">₱1799</p>
+        <button class="buy-button">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img
+          src="/images/images/adi.jpg"
+          alt="Adidas Ultraboost"
+          class="product-image"
+        />
+        <p class="brand-label">Adidas</p>
+        <h2 class="product-title">Adidas Samba</h2>
+        <p class="product-price">₱1899</p>
+        <button class="buy-button">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img
+          src="/images/images/puma.jpg"
+          alt="Puma Running"
+          class="product-image"
+        />
+        <p class="brand-label">Puma</p>
+        <h2 class="product-title">Puma SpeedCat</h2>
+        <p class="product-price">₱1899</p>
+        <button class="buy-button">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img
+          src="/images/images/bluaci.jpg"
+          alt="ASICS Gel"
+          class="product-image"
+        />
+        <p class="brand-label">ASICS</p>
+        <h2 class="product-title">Gel-1130</h2>
+        <p class="product-price">₱2099</p>
+        <button class="buy-button">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img
+          src="/images/images/lowcut.jpg"
+          alt="Nike Running"
+          class="product-image"
+        />
+        <p class="brand-label">Nike</p>
+        <h2 class="product-title">Dunk Low</h2>
+        <p class="product-price">₱1699</p>
+        <button class="buy-button">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <span class="sale-badge">Trending</span>
+        <img
+          src="/images/images/1906r.jpg"
+          alt="New Balance"
+          class="product-image"
+        />
+        <p class="brand-label">New Balance</p>
+        <h2 class="product-title">NB-1906r</h2>
+        <p class="product-price">₱2799</p>
+        <button class="buy-button">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img
+          src="/images/images/vomero.jpg"
+          alt="Nike Jogging"
+          class="product-image"
+        />
+        <p class="brand-label">Nike</p>
+        <h2 class="product-title">Zoom Vomero 5</h2>
+        <p class="product-price">₱2499</p>
+        <button class="buy-button">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <span class="sale-badge">Sale</span>
+        <img
+          src="/images/images/mn.jpg"
+          alt="Nike Jogging"
+          class="product-image"
+        />
+        <p class="brand-label">Black</p>
+        <h2 class="product-title">Modern Nigga</h2>
+        <p class="product-price">₱99</p>
+        <button class="buy-button">Add to Cart</button>
+      </div>
+
+    </div>
+
+   
+    
+  </body>
+</html>
